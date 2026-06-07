@@ -1,0 +1,23 @@
+# ── Sample news snippets (mix of adverse and benign) ─────────────────────
+SNIPPETS: list[dict] = [
+    {"id": "s_001", "text": "Authorities in Frankfurt seized €4.2 million from accounts linked to Alexander Petrov following an investigation into sanctions evasion and money laundering through shell companies."},
+    {"id": "s_002", "text": "The annual shareholder meeting of TechGlobal AG concluded with approval of the new sustainability report and a 3% dividend increase."},
+    {"id": "s_003", "text": "Viktor Yanukovich was indicted by Ukrainian prosecutors on charges of high treason and embezzlement of state funds totaling an estimated $1.5 billion."},
+    {"id": "s_004", "text": "The city council approved new zoning regulations for the downtown business district, citing economic development goals."},
+    {"id": "s_005", "text": "Nicolás Maduro's government was accused by the UN Human Rights Council of systematic torture, extrajudicial killings, and arbitrary detention of political opponents."},
+    {"id": "s_006", "text": "Local bakery chain expanded to three new locations in the metropolitan area, creating 150 new jobs."},
+    {"id": "s_007", "text": "Igor Sechin, CEO of Rosneft, was named in a US Treasury OFAC designation for enabling Russia's continued aggression in Ukraine through oil revenue."},
+    {"id": "s_008", "text": "The sports team celebrated its tenth consecutive national championship with a parade through the city centre."},
+    {"id": "s_009", "text": "Court documents reveal that Gulnara Karimova received bribes of over $800 million from European telecommunications companies seeking Uzbek market access."},
+    {"id": "s_010", "text": "The national weather service issued a forecast of scattered showers for the weekend with temperatures remaining seasonably mild."},
+    {"id": "s_011", "text": "Ramzan Kadyrov was sanctioned by the US, UK, and EU for documented human rights abuses including torture and forced disappearances in Chechnya."},
+    {"id": "s_012", "text": "Research published in the Journal of Finance examines the relationship between interest rate policy and small business lending volumes."},
+    {"id": "s_013", "text": "Teodorin Obiang agreed to forfeit $30 million in US assets — including a private jet and Malibu mansion — as part of a settlement with the Department of Justice over corruption proceeds."},
+    {"id": "s_014", "text": "The university announced a new scholarship programme funded by an anonymous donor to support students in STEM fields."},
+    {"id": "s_015", "text": "Gennady Timchenko's trading firm Gunvor was implicated in a Swiss criminal investigation for suspected bribery of African government officials to secure oil contracts."},
+    {"id": "s_016", "text": "Local authorities commended the neighbourhood watch programme for a significant reduction in petty crime over the past year."},
+    {"id": "s_017", "text": "Omar Al-Bashir faces an International Criminal Court arrest warrant for genocide, crimes against humanity, and war crimes in Darfur."},
+    {"id": "s_018", "text": "The restaurant group announced a new seasonal menu featuring locally sourced ingredients from regional farms."},
+    {"id": "s_019", "text": "Arkady Rotenberg's construction company was awarded contracts totalling ₽250 billion in connection with Crimean infrastructure projects following OFAC sanctions designations."},
+    {"id": "s_020", "text": "A local theatre company received critical acclaim for its production of a classic play, with sold-out performances for three consecutive weeks."},
+]

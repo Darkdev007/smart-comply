@@ -1,0 +1,17 @@
+# Virtual environment
+venv/
+
+# Environment variables
+src/.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# FAISS index cache (built at runtime)
+src/faiss.index
+src/embeddings.npy
+
+
