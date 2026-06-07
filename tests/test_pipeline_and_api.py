@@ -4,6 +4,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import pytest
+import numpy as np
 from unittest.mock import patch, MagicMock
 
 
@@ -19,12 +20,19 @@ MOCK_ADVERSE_MEDIA = [
 ]
 
 
+def _mock_openai():
+    mock_client = MagicMock()
+    mock_response = MagicMock()
+    mock_response.data = [MagicMock(embedding=[0.1] * 1536)]
+    mock_client.embeddings.create.return_value = mock_response
+    return mock_client
+
+
 class TestScreenEntity:
     @patch("package.pipeline.run_classifier", return_value=MOCK_ADVERSE_MEDIA)
     @patch("package.pipeline.find_top_matches", return_value=MOCK_WATCHLIST_HITS)
-    @patch("package.pipeline.index_vectors", MagicMock())
-    @patch("package.pipeline.index_rows", [])
-    def test_returns_dict_with_required_keys(self, mock_matches, mock_classifier):
+    @patch("package.watchlist.openai_client", new_callable=_mock_openai)
+    def test_returns_dict_with_required_keys(self, *_):
         from package.pipeline import screen_entity
         result = screen_entity("Aleksandr Petrov")
         assert "query" in result
@@ -33,27 +41,24 @@ class TestScreenEntity:
 
     @patch("package.pipeline.run_classifier", return_value=MOCK_ADVERSE_MEDIA)
     @patch("package.pipeline.find_top_matches", return_value=MOCK_WATCHLIST_HITS)
-    @patch("package.pipeline.index_vectors", MagicMock())
-    @patch("package.pipeline.index_rows", [])
-    def test_query_preserved_in_result(self, mock_matches, mock_classifier):
+    @patch("package.watchlist.openai_client", new_callable=_mock_openai)
+    def test_query_preserved_in_result(self, *_):
         from package.pipeline import screen_entity
         result = screen_entity("Aleksandr Petrov")
         assert result["query"] == "Aleksandr Petrov"
 
     @patch("package.pipeline.run_classifier", return_value=MOCK_ADVERSE_MEDIA)
     @patch("package.pipeline.find_top_matches", return_value=MOCK_WATCHLIST_HITS)
-    @patch("package.pipeline.index_vectors", MagicMock())
-    @patch("package.pipeline.index_rows", [])
-    def test_watchlist_hits_is_list(self, mock_matches, mock_classifier):
+    @patch("package.watchlist.openai_client", new_callable=_mock_openai)
+    def test_watchlist_hits_is_list(self, *_):
         from package.pipeline import screen_entity
         result = screen_entity("Test Entity")
         assert isinstance(result["watchlist_hits"], list)
 
     @patch("package.pipeline.run_classifier", return_value=MOCK_ADVERSE_MEDIA)
     @patch("package.pipeline.find_top_matches", return_value=MOCK_WATCHLIST_HITS)
-    @patch("package.pipeline.index_vectors", MagicMock())
-    @patch("package.pipeline.index_rows", [])
-    def test_adverse_media_is_list(self, mock_matches, mock_classifier):
+    @patch("package.watchlist.openai_client", new_callable=_mock_openai)
+    def test_adverse_media_is_list(self, *_):
         from package.pipeline import screen_entity
         result = screen_entity("Test Entity")
         assert isinstance(result["adverse_media"], list)
@@ -63,8 +68,7 @@ class TestScreenEntity:
 def client():
     with patch("package.pipeline.find_top_matches", return_value=MOCK_WATCHLIST_HITS), \
          patch("package.pipeline.run_classifier",   return_value=MOCK_ADVERSE_MEDIA), \
-         patch("package.pipeline.index_vectors",    MagicMock()), \
-         patch("package.pipeline.index_rows",       []):
+         patch("package.watchlist.openai_client",   new_callable=_mock_openai):
         from fastapi.testclient import TestClient
         from package.api import app
         yield TestClient(app)
