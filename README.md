@@ -54,6 +54,11 @@ smart-comply/
 │       ├── watchlist.py            # Fuzzy + phonetic + embedding watchlist matcher
 │       ├── adverse_media.py        # LLM-based zero-shot adverse media classifier
 │       └── rag.py                  # FAISS RAG pipeline with Cohere reranking
+│ 
+├── tests/                          # Pytest test suite
+│   ├── test_watchlist.py           # Tests for watchlist matching functions
+│   ├── test_adverse_media.py       # Tests for adverse media classifier
+│   └── test_pipeline_and_api.py    # Tests for pipeline orchestrator and API endpoints
 │
 └── README.md                       # This file
 ```
@@ -207,6 +212,21 @@ python -m package.rag
 ```
 
 > **Note:** The first run calls the OpenAI embeddings API to build the index and saves `faiss.index` and `embeddings.npy` to disk. Subsequent runs load from disk and are much faster.
+
+### Run all tests
+From the `src/` directory:
+
+```powershell
+pytest ../tests/ -v
+```
+
+To run a single file:
+
+```powershell
+pytest ../tests/test_watchlist.py -v
+pytest ../tests/test_adverse_media.py -v
+pytest ../tests/test_pipeline_and_api.py -v
+```
 
 ---
 
