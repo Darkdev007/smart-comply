@@ -2,7 +2,7 @@ import os
 import faiss
 import cohere
 import numpy as np
-from data.news import documents
+from data.corpus import documents
 from openai import OpenAI
 from dotenv import load_dotenv
 
